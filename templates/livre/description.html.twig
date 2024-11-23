@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Conteneur des détails du livre */
+        .livre-details {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 700px;
+            margin: 50px auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Effet au survol du conteneur */
+        .livre-details:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(68, 10, 39, 0.925);
+        }
+
+        /* Titres des sections */
+        .livre-details p span {
+            font-weight: 600;
+            font-size: 18px;
+            color: #c35495; /* Un bleu doux pour la lisibilité */
+        }
+
+        /* Style des paragraphes */
+        .livre-details p {
+            font-size: 16px;
+            color: #333;
+            margin: 12px 0;
+            line-height: 1.6;
+        }
+
+        /* Ajouter un effet de survol pour le lien */
+        .livre-details a {
+            display: inline-block;
+            text-align: center;
+            margin-top: 20px;
+            background-color: #6e1551;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Effet de survol du lien */
+        .livre-details a:hover {
+            background-color: #ce409c;
+            transform: translateY(-3px);
+        }
+
+        /* Style de la description en italique */
+        .livre-details p:last-child {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="livre-details">
+        <p><span>Titre:</span> {{ livre.Titre }}</p>
+        <p><span>Auteur:</span> {{ livre.Auteur }}</p>
+        <p><span>Date de publication:</span> {{ livre.getDateDePublication() | date('d/m/y') }}</p>
+        <p><span>Description:</span> {{ livre.Description }}</p>
+        <a href="{{ path('app_livre') }}">Retour à la liste des livres</a>
+    </div>
+{% endblock %}

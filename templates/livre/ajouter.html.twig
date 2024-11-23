@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #f8277b;
+            text-align: center;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #5a073e;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        textarea:focus {
+            border-color: #8b0f65;
+            outline: none;
+        }
+
+        button {
+            background-color: #660d48;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #ed98c8;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #ea4176;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+
+
+    <h1>Ajouter un livre</h1>
+    <form method="post">
+        <input type="text" name="titre" placeholder="Titre" required>
+        <input type="text" name="auteur" placeholder="Auteur" required>
+        <input type="date" name="DateDePublication" required>
+        <textarea name="description" placeholder="Description du Livre" required></textarea> 
+        <br>
+        <button type="submit">Ajouter</button>
+    </form>
+    <a href="{{ path('app_livre') }}">Liste de livres</a>
+{% endblock %}

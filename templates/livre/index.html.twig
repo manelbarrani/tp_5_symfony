@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<!-- Ajout du CSS directement dans le bloc body -->
+<style>
+    /* Style global du corps de la page */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7; /* Fond gris clair */
+        color: #5a073e; /* Texte sombre pour une bonne lisibilité */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* En-tête principal */
+    h1 {
+        text-align: center;
+        color: #660d48; /* Vert pour l'en-tête */
+        margin-top: 30px;
+    }
+
+    /* Style du lien "Ajouter un livre" */
+    a {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #db2165; /* Fond vert */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 20px auto;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    a:hover {
+        background-color: #8e567a; /* Variation au survol */
+    }
+
+    /* Style du tableau */
+    table {
+        width: 80%;
+        margin: 20px auto; /* Centrer le tableau */
+        border-collapse: collapse; /* Fusionner les bordures */
+        background-color: white; /* Fond blanc */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce autour du tableau */
+    }
+
+    /* Style des en-têtes du tableau */
+    th {
+        background-color: #db2165; /* Fond vert */
+        color: white;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    /* Style des cellules du tableau */
+    td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd; /* Bordure légère entre les lignes */
+    }
+
+    /* Changement de couleur au survol des lignes du tableau */
+    tr:hover {
+        background-color: #f1f1f1; /* Fond gris clair au survol */
+    }
+
+    /* Style des boutons "Description" et "Supprimer" */
+    .btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 5px;
+        color: white;
+    }
+
+    /* Bouton "Description" */
+    .btn-info {
+        background-color: #df7196; /* Bleu clair */
+    }
+
+    .btn-info:hover {
+        background-color: #df7196; /* Variation de bleu au survol */
+    }
+
+    /* Bouton "Supprimer" */
+    .btn-danger {
+        background-color: #551044; /* Rouge */
+    }
+
+    .btn-danger:hover {
+        background-color: #551044; /* Variation de rouge au survol */
+    }
+
+    /* Formulaire pour le bouton "Supprimer" (éviter l'affichage du bouton submit par défaut) */
+    form {
+        display: inline-block; /* Pour que le bouton "Supprimer" apparaisse à côté de "Description" */
+    }
+
+    /* Ajout d'une bordure autour du tableau pour plus de clarté */
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    /* Stylisation générale des boutons pour rendre l'interface plus cohérente */
+    button {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+</style>
+
+<h1>Liste des livres</h1>
+<a href="{{ path('app_livre_ajouter') }}">Ajouter un livre</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Date de Publication</th>
+            <th>Actions</th> <!-- Nouvelle colonne pour les actions -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for livre in livres %}
+        <tr>
+            <td>{{ livre.Titre }}</td>
+            <td>{{ livre.Auteur }}</td>
+            <td>{{ livre.DateDePublication|date('Y-m-d') }}</td>
+            <td>
+                <!-- Boutons pour Description et Supprimer -->
+                <a href="{{ path('app_livre_description', {'id': livre.id}) }}" class="btn btn-info">Description</a>
+                <form action="{{ path('app_livre_supprimer', {'id': livre.id}) }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
